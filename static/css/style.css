@@ -1,0 +1,462 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.container {
+    width: 450px;
+    margin: 60px auto;
+    padding: 35px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+    color: #1f3c88;
+    margin-bottom: 25px;
+}
+
+p {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+input,
+select {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    margin-top: 6px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+input:focus,
+select:focus {
+    border-color: #1f8ef1;
+    outline: none;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    background: #1f8ef1;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #166fc1;
+}
+
+.result {
+    text-align: center;
+    margin-top: 20px;
+    padding: 25px;
+    border-radius: 15px;
+    background: #f0f8ff;
+    border: 2px solid #1f8ef1;
+}
+
+.result h2 {
+    color: #1f3c88;
+    margin-bottom: 5px;
+}
+
+.result h3 {
+    color: #28a745;
+    font-size: 22px;
+}
+
+.result p {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+.prediction {
+    font-size: 30px !important;
+    color: #28a745 !important;
+    font-weight: bold;
+}
+.history-container {
+    width: 700px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background: white;
+}
+
+th {
+    background: #1f8ef1;
+    color: white;
+    padding: 12px;
+}
+
+td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background: #f0f8ff;
+}
+
+.fitness-cell {
+    color: #28a745;
+    font-weight: bold;
+}
+.result-card {
+    background: #f8fbff;
+    border: 1px solid #d8e8f5;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.result-card h2 {
+    margin: 5px 0 10px;
+    color: #1f3c88;
+}
+
+.bmi-value {
+    font-size: 30px !important;
+    color: #1f8ef1 !important;
+}
+
+.category {
+    font-size: 24px !important;
+    color: #28a745 !important;
+}
+
+.fitness-card {
+    background: #f0fff4;
+    border: 2px solid #28a745;
+}
+
+.prediction {
+    font-size: 32px !important;
+    color: #28a745 !important;
+}
+
+a {
+    text-decoration: none;
+}
+.error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin: 15px 0;
+}
+.dashboard-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 35px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.dashboard-container h1 {
+    margin-bottom: 8px;
+}
+
+.dashboard-subtitle {
+    color: #666;
+    font-size: 17px;
+    margin-bottom: 35px;
+}
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.dashboard-card {
+    background: #f8fbff;
+    border: 1px solid #dceaf5;
+    border-radius: 15px;
+    padding: 25px 15px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+
+.dashboard-icon {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.dashboard-card h2 {
+    font-size: 18px;
+    color: #1f3c88;
+    margin: 8px 0;
+}
+
+.dashboard-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1f8ef1;
+    margin: 15px 0 5px;
+}
+
+.dashboard-category {
+    font-size: 25px;
+    font-weight: bold;
+    color: #28a745;
+    margin: 15px 0 5px;
+}
+
+.dashboard-fitness {
+    font-size: 25px;
+    font-weight: bold;
+    color: #28a745;
+    margin: 15px 0 5px;
+}
+
+.dashboard-card span {
+    color: #777;
+    font-size: 14px;
+}
+
+.fitness-dashboard-card {
+    background: #f0fff4;
+    border: 2px solid #28a745;
+}
+
+.dashboard-actions {
+    margin-top: 35px;
+}
+
+.dashboard-actions a {
+    text-decoration: none;
+}
+
+.dashboard-actions button {
+    margin-top: 12px;
+}
+
+@media (max-width: 900px) {
+
+    .dashboard-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .dashboard-container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+
+}
+.dashboard-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    box-sizing: border-box;
+}
+
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.dashboard-header h1 {
+    color: #1f3c88;
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.dashboard-header p {
+    color: #666;
+    font-size: 17px;
+}
+
+.dashboard-menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.dashboard-menu a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.menu-card {
+    min-height: 250px;
+    padding: 30px 20px;
+    background: #f8fbff;
+    border: 1px solid #dceaf5;
+    border-radius: 18px;
+    text-align: center;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+.menu-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.menu-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.menu-card h2 {
+    color: #1f3c88;
+    margin: 10px 0;
+}
+
+.menu-card p {
+    color: #666;
+    line-height: 1.6;
+    min-height: 50px;
+}
+
+.menu-card span {
+    display: inline-block;
+    margin-top: 15px;
+    color: #1f8ef1;
+    font-weight: bold;
+}
+
+@media (max-width: 800px) {
+
+    .dashboard-menu {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-container {
+        width: 95%;
+        padding: 25px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 28px;
+    }
+}
+/* Fitness Summary */
+
+.fitness-summary {
+    margin-top: 40px;
+    padding: 30px;
+    background: #f8fbff;
+    border: 1px solid #dceaf5;
+    border-radius: 18px;
+}
+
+.fitness-summary h2 {
+    text-align: center;
+    color: #1f3c88;
+    margin-bottom: 25px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.summary-card {
+    background: white;
+    padding: 22px 15px;
+    border-radius: 15px;
+    border: 1px solid #dceaf5;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.summary-icon {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.summary-card h3 {
+    color: #555;
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+.summary-card p {
+    color: #1f3c88;
+    font-size: 23px;
+    font-weight: bold;
+    margin: 10px 0 0;
+}
+
+.no-summary {
+    color: #666;
+    padding: 20px;
+}
+
+
+/* Responsive Fitness Summary */
+
+@media (max-width: 900px) {
+
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .fitness-summary {
+        padding: 20px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

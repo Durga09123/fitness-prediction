@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Fitness Records</title>
+
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+
+
+</head>
+
+<body>
+
+<div class="container history-container">
+
+
+<h1>Fitness Records</h1>
+
+{% if records %}
+
+<table>
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Age</th>
+            <th>Weight</th>
+            <th>Exercise</th>
+            <th>Sleep</th>
+            <th>BMI</th>
+            <th>Category</th>
+            <th>Fitness Level</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for record in records %}
+
+        <tr>
+
+            <td>{{ loop.index }}</td>
+
+            <td>{{ record[1] }}</td>
+
+            <td>{{ record[4] }} kg</td>
+
+            <td>{{ record[5] }} min</td>
+
+            <td>{{ record[7] }} hrs</td>
+
+            <td>{{ record[8] }}</td>
+
+            <td>{{ record[9] }}</td>
+
+            <td class="fitness-cell">
+                {{ record[10] }}
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+</table>
+
+{% else %}
+
+<p>No fitness records available.</p>
+
+{% endif %}
+
+
+<!-- Delete All Records -->
+
+<form action="/delete-history"
+      method="POST"
+      onsubmit="return confirm('Are you sure you want to delete all fitness records?');">
+
+    <button type="submit"
+            class="delete-button">
+        Delete All Records
+    </button>
+
+</form>
+
+
+<!-- New Fitness Analysis -->
+
+<a href="/input">
+    <button>
+        🏃 New Fitness & BMI
+    </button>
+</a>
+
+
+<!-- Home -->
+
+<a href="/">
+    <button>
+        🏠 Home
+    </button>
+</a>
+
+
+</div>
+
+</body>
+</html>

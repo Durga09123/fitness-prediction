@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fitness Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eef2ff, #e0f2fe, #f0fdf4);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4f46e5, #2563eb, #06b6d4);
+            color: white;
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .header h1 {
+            font-size: 30px;
+            margin-bottom: 6px;
+        }
+
+        .header p {
+            font-size: 15px;
+            opacity: 0.9;
+        }
+
+        .logout {
+            background: white;
+            color: #2563eb;
+            padding: 11px 22px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .logout:hover {
+            background: #dbeafe;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        .welcome {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .welcome h2 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #64748b;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            color: white;
+            padding: 28px;
+            border-radius: 22px;
+            min-height: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+        }
+
+        .card1 {
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+        }
+
+        .card2 {
+            background: linear-gradient(135deg, #06b6d4, #2563eb);
+        }
+
+        .card3 {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 18px;
+        }
+
+        .card p {
+            margin: 9px 0;
+            font-size: 15px;
+        }
+
+        .card strong {
+            font-size: 18px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            background: white;
+            color: #1e40af;
+            padding: 11px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.04);
+            background: #f8fafc;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-card h4 {
+            color: #64748b;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .stat-card .value {
+            font-size: 30px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .progress-section {
+            background: white;
+            padding: 30px;
+            border-radius: 22px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .progress-section h2 {
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 350px;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #64748b;
+            padding: 40px;
+            font-size: 17px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        @media (max-width: 900px) {
+
+            .cards,
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+
+        <div>
+            <h1>Fitness Prediction System</h1>
+            <p>Health & Fitness Dashboard</p>
+        </div>
+
+        <a href="{{ url_for('logout') }}" class="logout">
+            Logout
+        </a>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="welcome">
+
+            <h2>Welcome, {{ username }} 👋</h2>
+
+            <p>
+                Track your fitness, BMI and weight prediction in one place.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            <!-- BMI & FITNESS CARD -->
+
+            <div class="card card1">
+
+                <h3>❤️ Fitness & BMI</h3>
+
+                <p>
+                    BMI:
+                    <strong>
+                        {% if latest_bmi %}
+                            {{ latest_bmi }}
+                        {% else %}
+                            No Data
+                        {% endif %}
+                    </strong>
+                </p>
+
+                <p>
+                    Category:
+                    <strong>
+                        {% if bmi_category %}
+                            {{ bmi_category }}
+                        {% else %}
+                            No Data
+                        {% endif %}
+                    </strong>
+                </p>
+
+                <p>
+                    Fitness Level:
+                    <strong>
+                        {% if fitness_level %}
+                            {{ fitness_level }}
+                        {% else %}
+                            No Data
+                        {% endif %}
+                    </strong>
+                </p>
+
+                <a href="{{ url_for('input_page') }}" class="btn">
+                    ❤️ Check BMI & Fitness
+                </a>
+
+            </div>
+
+
+            <!-- HISTORY CARD -->
+
+            <div class="card card2">
+
+                <h3>📊 Fitness Records</h3>
+
+                <p>
+                    Your total fitness predictions:
+                </p>
+
+                <p>
+                    <strong>{{ total_records }}</strong>
+                    Records
+                </p>
+
+                <a href="{{ url_for('history') }}" class="btn">
+                    📋 View History
+                </a>
+
+            </div>
+
+
+            <!-- WEIGHT PREDICTION CARD -->
+
+            <div class="card card3">
+
+                <h3>⚖️ Weight Prediction</h3>
+
+                <p>
+                    Predict your future weight using
+                    Machine Learning.
+                </p>
+
+                <p>
+                    Get a month-wise weight prediction.
+                </p>
+
+                <a href="{{ url_for('weight_prediction_page') }}" class="btn">
+                    ⚖️ Predict Weight
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATISTICS -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <h4>Latest Weight</h4>
+
+                <div class="value">
+
+                    {% if latest_weight %}
+                        {{ latest_weight }} kg
+                    {% else %}
+                        --
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h4>Latest BMI</h4>
+
+                <div class="value">
+
+                    {% if latest_bmi %}
+                        {{ latest_bmi }}
+                    {% else %}
+                        --
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h4>Fitness Level</h4>
+
+                <div class="value">
+
+                    {% if fitness_level %}
+                        {{ fitness_level }}
+                    {% else %}
+                        --
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FITNESS PROGRESS -->
+
+        <div class="progress-section">
+
+            <h2>📈 Fitness Progress</h2>
+
+            {% if progress_labels and progress_weights %}
+
+                <div class="chart-container">
+
+                    <canvas id="fitnessChart"></canvas>
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-message">
+
+                    <p>
+                        No fitness progress data available.
+                    </p>
+
+                    <p>
+                        Make a BMI & Fitness prediction
+                        to see your progress here.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <footer>
+        Fitness Prediction System © 2026
+    </footer>
+
+
+    {% if progress_labels and progress_weights %}
+
+    <script>
+
+        const labels = {{ progress_labels | tojson }};
+
+        const weights = {{ progress_weights | tojson }};
+
+        const bmis = {{ progress_bmis | tojson }};
+
+
+        const ctx = document.getElementById('fitnessChart');
+
+
+        new Chart(ctx, {
+
+            type: 'line',
+
+            data: {
+
+                labels: labels,
+
+                datasets: [
+
+                    {
+                        label: 'Weight (kg)',
+                        data: weights,
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: false
+                    },
+
+                    {
+                        label: 'BMI',
+                        data: bmis,
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: false
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+                        beginAtZero: false
+                    }
+
+                }
+
+            }
+
+        });
+
+    </script>
+
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BMI & Fitness Analysis</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed, #ec4899);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .result-container {
+            width: 100%;
+            max-width: 850px;
+            background: white;
+            border-radius: 30px;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .heading .icon {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        .heading h1 {
+            color: #312e81;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .status-card {
+            padding: 25px;
+            border-radius: 22px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .fit {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border: 2px solid #22c55e;
+        }
+
+        .unfit {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border: 2px solid #ef4444;
+        }
+
+        .status-card .status {
+            font-size: 38px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .fit .status {
+            color: #15803d;
+        }
+
+        .unfit .status {
+            color: #dc2626;
+        }
+
+        .status-card p {
+            color: #475569;
+            font-size: 15px;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .result-card {
+            padding: 25px 15px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .bmi-card {
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+        }
+
+        .fitness-card {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .result-card .emoji {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .result-card h3 {
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .result-card .value {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .check-btn {
+            background: linear-gradient(135deg, #7c3aed, #ec4899);
+            color: white;
+        }
+
+        .dashboard-btn {
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+            color: white;
+        }
+
+        @media (max-width: 700px) {
+
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .result-container {
+                padding: 25px 18px;
+            }
+
+            .heading h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="result-container">
+
+        <div class="heading">
+
+            <div class="icon">❤️</div>
+
+            <h1>BMI & Fitness Analysis</h1>
+
+            <p>Your health and fitness prediction results</p>
+
+        </div>
+
+
+        {% if bmi >= 18.5 and bmi <= 24.9 %}
+
+        <div class="status-card fit">
+
+            <div class="status">
+                🟢 FIT
+            </div>
+
+            <p>
+                Your BMI is within the normal range.
+            </p>
+
+        </div>
+
+        {% else %}
+
+        <div class="status-card unfit">
+
+            <div class="status">
+                🔴 UNFIT
+            </div>
+
+            <p>
+                Your BMI is outside the normal range.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+        <div class="result-grid">
+
+            <div class="result-card bmi-card">
+
+                <div class="emoji">⚖️</div>
+
+                <h3>BMI</h3>
+
+                <div class="value">
+                    {{ bmi }}
+                </div>
+
+            </div>
+
+
+            <div class="result-card category-card">
+
+                <div class="emoji">📊</div>
+
+                <h3>BMI Category</h3>
+
+                <div class="value">
+                    {{ bmi_category }}
+                </div>
+
+            </div>
+
+
+            <div class="result-card fitness-card">
+
+                <div class="emoji">💪</div>
+
+                <h3>Fitness Level</h3>
+
+                <div class="value">
+                    {{ fitness_level }}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="buttons">
+
+            <a href="{{ url_for('input_page') }}" class="btn check-btn">
+                ❤️ Check BMI Again
+            </a>
+
+            <a href="{{ url_for('dashboard') }}" class="btn dashboard-btn">
+                🏠 Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
